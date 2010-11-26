@@ -4,6 +4,11 @@ import os
 version = '1.0'
 maintainer = 'Jonas Baumann'
 
+tests_require = [
+    'collective.testcaselayer',
+    ]
+
+
 setup(name='ftw.publisher.monitor',
       version=version,
       description="Publisher monitoring system for monitoring the queue" + \
@@ -26,8 +31,13 @@ setup(name='ftw.publisher.monitor',
       zip_safe=False,
       install_requires=[
         'setuptools',
+        'z3c.autoinclude',
+        'ftw.publisher.sender',
+        'plone.fieldsets',
         # -*- Extra requirements: -*-
         ],
+      tests_require=tests_require,
+      extras_require=dict(tests=tests_require),
       entry_points="""
       # -*- Entry points: -*-
       [z3c.autoinclude.plugin]
