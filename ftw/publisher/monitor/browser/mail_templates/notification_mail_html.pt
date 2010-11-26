@@ -1,0 +1,23 @@
+<html i18n:domain="ftw.publisher.monitor">
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <title tal:content="options/subject"></title>
+    </head>
+    <body>
+        <h1 tal:content="options/subject">
+        </h1>
+
+        <p i18n:translate="warning_mail_message">
+            The amunt of jobs in the publisher queue of the senders host
+            reached the threshold. The queue may be blocked!
+        </p>
+
+        <table>
+            <tr>
+                <th i18n:translate="mail_th_jobs_in_queue">Jobs in the queue:</th>
+                <td tal:content="options/jobs_in_queue"></td>
+            </tr>
+        </table>
+
+    </body>
+</html>

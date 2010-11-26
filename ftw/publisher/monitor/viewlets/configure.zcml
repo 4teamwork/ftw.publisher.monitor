@@ -1,0 +1,14 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="ftw.publisher.monitor">
+
+  <browser:viewlet
+      name="ftw.publisher.monitor-config-link"
+      manager="ftw.publisher.sender.interfaces.IConfigletViewletManager"
+      class=".link.MonitorConfigLink"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      permission="cmf.ManagePortal"
+      />
+
+</configure>

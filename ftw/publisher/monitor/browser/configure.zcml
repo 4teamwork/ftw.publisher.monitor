@@ -1,0 +1,23 @@
+<configure
+      xmlns="http://namespaces.zope.org/zope"
+      xmlns:browser="http://namespaces.zope.org/browser"
+      xmlns:five="http://namespaces.zope.org/five"
+      i18n_domain="ftw.publisher.monitor">
+
+    <adapter factory=".config.MonitorConfigurationAdapter" />
+
+    <browser:page
+          name="publisher-monitor-config"
+          for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+          class=".config.MonitorConfigurationForm"
+          permission="cmf.ManagePortal"
+          />
+
+    <browser:page
+          name="publisher-monitor-mail_notification_html"
+          for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+          template="mail_templates/notification_mail_html.pt"
+          permission="zope2.View"
+          />
+
+</configure>

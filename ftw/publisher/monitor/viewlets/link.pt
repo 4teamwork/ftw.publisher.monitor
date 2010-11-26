@@ -1,0 +1,7 @@
+<div class="publisher-config-link monitor-link"
+     i18n:domain="ftw.publisher.monitor">
+  <a tal:attributes="href string:${here/portal_url}/@@publisher-monitor-config"
+     i18n:translate="link_monitor_configuration">
+    Monitor configuration
+  </a>
+</div>

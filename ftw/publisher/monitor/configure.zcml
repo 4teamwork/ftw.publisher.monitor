@@ -1,0 +1,29 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="ftw.publisher.monitor">
+
+  <!-- Include configuration for dependencies listed in setup.py -->
+  <include package="z3c.autoinclude" file="meta.zcml" />
+  <includeDependencies package="." />
+
+  <i18n:registerTranslations directory="locales" />
+
+  <include package=".browser" />
+  <include package=".viewlets" />
+
+  <subscriber
+      for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot
+           ftw.publisher.sender.interfaces.IBeforeQueueExecutionEvent"
+      handler=".handlers.invoke_notification"
+      />
+
+  <adapter
+      for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+      provides="ftw.publisher.monitor.interfaces.IReportNotifier"
+      factory=".adapters.MonitorNotifier"
+      />
+
+</configure>
