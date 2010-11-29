@@ -36,7 +36,7 @@ class MonitorNotifier(object):
                            'iso-8859-1')
 
         # Subject
-        subject = self.get_subject()
+        subject = self.context.translate(self.get_subject())
         header_subject = Header(unicode(subject), 'iso-8859-1')
 
         html_body = self.render_template().encode('utf-8')

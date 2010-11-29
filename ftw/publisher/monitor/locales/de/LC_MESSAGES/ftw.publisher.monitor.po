@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"PO-Revision-Date: 2010-11-29 13:42+0100\n"
+"PO-Revision-Date: 2010-11-29 13:52+0100\n"
 "Last-Translator: Jonas Baumann <j.baumann@4teamwork.ch>\n"
 "Language-Team: 4teamwork <info@4teamwork.ch>\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr "Warnung Publisher Überwachung auf ${site}"
 #. Default: "Jobs in the queue:"
 #: ftw.publisher.monitor/ftw/publisher/monitor/browser/mail_templates/notification_mail_html.pt:17
 msgid "mail_th_jobs_in_queue"
-msgstr "Anzahl Aufträge in der Warteschleife"
+msgstr "Anzahl Aufträge in der Warteschleife:"
 
 #. Default: "The amunt of jobs in the publisher queue of the senders host reached the threshold. The queue may be blocked!"
 #: ftw.publisher.monitor/ftw/publisher/monitor/browser/mail_templates/notification_mail_html.pt:10

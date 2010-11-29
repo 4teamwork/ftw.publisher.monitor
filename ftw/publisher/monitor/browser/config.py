@@ -48,6 +48,9 @@ def email_addresses_validator(value):
 
     """
 
+    if value == None:
+        return True
+
     expr = re.compile(r"^(\w&.%#$&'\*+-/=?^_`{}|~]+!)*[\w&.%#$&'\*+-/=" +\
                           "?^_`{}|~]+@(([0-9a-z]([0-9a-z-]*[0-9a-z])?" +\
                           "\.)+[a-z]{2,6}|([0-9]{1,3}\.){3}[0-9]{1,3})$",
@@ -102,7 +105,7 @@ class MonitorConfigurationAdapter(SchemaAdapterBase):
     receivers = property(get_receivers_plain, set_receivers_plain)
 
     def get_threshold(self):
-        return self.storage.get('threshold', 100) and True or False
+        return self.storage.get('threshold', 100)
 
     def set_threshold(self, value):
         self.storage['threshold'] = int(value)
