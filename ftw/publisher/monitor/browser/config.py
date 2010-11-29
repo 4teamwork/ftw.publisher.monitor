@@ -116,10 +116,10 @@ class MonitorConfigurationForm(FieldsetsEditForm):
 
     template = ViewPageTemplateFile('config.pt')
 
-    label = _(u'label_notifier_configuration',
-              default=u'Notifier configuration')
-    description = _(u'help_notifier_configuration',
-                    default=u'Publisher notification configuration')
+    label = _(u'label_monitor_configuration',
+              default=u'Monitor configuration')
+    description = _(u'help_monitor_configuration',
+                    default=u'Publisher monitor configuration')
 
     form_name = label
     form_fields = form.FormFields(IMonitorConfigurationSchema)
