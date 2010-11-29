@@ -1,0 +1,104 @@
+E-Mail notification
+===================
+
+    >>> from Products.CMFCore.interfaces import IPropertiesTool
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> from Products.PloneTestCase.setup import portal_owner
+    >>> from datetime import datetime
+    >>> from ftw.publisher.core.states import ObjectNotFoundError
+    >>> from ftw.publisher.core.states import ObjectUpdatedState
+    >>> from ftw.publisher.core.states import UIDPathMismatchError
+    >>> from ftw.publisher.mailreport.interfaces import INotifierConfigurationSchema
+    >>> from ftw.publisher.sender.interfaces import IQueue
+    >>> from ftw.publisher.sender.persistence import Job
+    >>> from ftw.publisher.sender.persistence import Realm
+    >>> from pprint import pprint
+    >>> from zope.component import getUtility
+
+Let's be god:
+    >>> self.setRoles(('Manager',))
+
+Publishing the default user folder does not work because he
+has a index_html entry which confuses the publisher. So we
+create a own folder for which we make jobs:
+    >>> self.portal.invokeFactory('Folder', 'foo', title='Foo')
+    'foo'
+    >>> foo = self.portal.get('foo')
+    >>> foo
+    <ATFolder at /plone/foo>
+
+Some configurations:
+    >>> config = INotifierConfigurationSchema(self.portal)
+    >>> config.enabled = True
+    >>> config.detailed_report = True
+    >>> config.receivers = 'demo@user.com'
+    >>> properties = getUtility(IPropertiesTool)
+    >>> properties.email_from_name = 'Plone'
+    >>> properties.email_from_address = 'test@plone.org'
+
+Lets prepare a queue with some jobs, they will fail when
+we execute the queue:
+    >>> queue = IQueue(self.portal)
+
+Create a realm:
+    >>> realm = Realm(True, 'http://localhost:8080/', 'pub_user', 'pw')
+
+Add some failed jobs to the executed queue:
+    >>> job1 = Job('push', foo, portal_owner)
+    >>> state_entries = {'date': datetime.now(), realm:
+    ...     UIDPathMismatchError()}
+    >>> job1.executed_with_states(state_entries)
+    >>> queue.append_executed_job(job1)
+    1
+
+    >>> job2 = Job('push', foo, portal_owner)
+    >>> state_entries = {'date': datetime.now(), realm:
+    ...     ObjectNotFoundError()}
+    >>> job2.executed_with_states(state_entries)
+    >>> queue.append_executed_job(job2)
+    2
+
+And add a successful job:
+    >>> job3 = Job('push', foo, portal_owner)
+    >>> state_entries = {'date': datetime.now(), realm:
+    ...     ObjectUpdatedState()}
+    >>> job3.executed_with_states(state_entries)
+    >>> queue.append_executed_job(job3)
+    3
+
+Now we have some jobs in the queues:
+    >>> queue.countJobs()
+    0
+    >>> queue.get_executed_jobs_length()
+    3
+
+So lets test the mailreport notifier adapter:
+    >>> from ftw.publisher.mailreport.interfaces import IReportNotifier
+    >>> notifier = IReportNotifier(self.portal)
+    >>> notifier
+    <ftw.publisher.mailreport.adapters.MailReportNotifier object at ...>
+    >>> data = notifier.get_options().items()
+    >>> data.sort()
+    >>> pprint(data)
+    [('erroneous_jobs',
+      [<ftw.publisher.sender.persistence.Job object at ...>,
+       <ftw.publisher.sender.persistence.Job object at ...>]),
+     ('error', 2),
+     ('jobs_in_queue', 0),
+     ('show_details', True),
+     ('subject', u'mail_subject'),
+     ('success', 1),
+     ('total', 3),
+     ('warning', 0)]
+
+Lets call it:
+    >>> getToolByName(self.portal, 'MailHost') == self.portal.MailHost
+    True
+    >>> len(self.portal.MailHost)
+    0
+    >>> notifier()
+    >>> len(self.portal.MailHost)
+    1
+    >>> msg = self.portal.MailHost.pop().as_string()
+    >>> '3' in msg
+    True

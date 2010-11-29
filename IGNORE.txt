@@ -1,8 +1,15 @@
 # created by: svn propset svn:ignore -F ./IGNORE.TXT .
 
 *.egg-info
-build
-dist
-*.pyc
 *.mo
+*.pyc
 ._*
+.installed.cfg
+.mr.developer.cfg
+bin/
+build
+buildout.cfg
+develop-eggs/
+dist
+parts/
+src/
