@@ -1,5 +1,5 @@
 from ftw.publisher.monitor.interfaces import IMonitorConfigurationSchema
-from ftw.publisher.monitor.interfaces import IReportNotifier
+from ftw.publisher.monitor.interfaces import IMonitorNotifier
 
 
 def invoke_notification(obj, event):
@@ -13,4 +13,4 @@ def invoke_notification(obj, event):
 
     amount_of_jobs = event.queue.countJobs()
     if amount_of_jobs >= config.threshold:
-        return IReportNotifier(obj)(config, event.queue)
+        return IMonitorNotifier(obj)(config, event.queue)

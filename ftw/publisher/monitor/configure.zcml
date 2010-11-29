@@ -22,7 +22,7 @@
 
   <adapter
       for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
-      provides="ftw.publisher.monitor.interfaces.IReportNotifier"
+      provides="ftw.publisher.monitor.interfaces.IMonitorNotifier"
       factory=".adapters.MonitorNotifier"
       />
 

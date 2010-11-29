@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"PO-Revision-Date: 2010-11-29 13:31+0100\n"
+"PO-Revision-Date: 2010-11-29 13:42+0100\n"
 "Last-Translator: Jonas Baumann <j.baumann@4teamwork.ch>\n"
 "Language-Team: 4teamwork <info@4teamwork.ch>\n"
 "MIME-Version: 1.0\n"
@@ -60,7 +60,7 @@ msgstr "Konfiguration Überwachung"
 #. Default: "Notification enabled"
 #: ftw.publisher.monitor/ftw/publisher/monitor/interfaces.py:17
 msgid "label_notification_enabled"
-msgstr "Benachrichtigung aktiviert"
+msgstr "Überwachung aktiviert"
 
 #. Default: "Receivers"
 #: ftw.publisher.monitor/ftw/publisher/monitor/interfaces.py:21

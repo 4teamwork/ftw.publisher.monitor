@@ -3,7 +3,7 @@ from Products.CMFCore.utils import getToolByName
 from email.Header import Header
 from email.MIMEText import MIMEText
 from ftw.publisher.monitor import _
-from ftw.publisher.monitor.interfaces import IReportNotifier
+from ftw.publisher.monitor.interfaces import IMonitorNotifier
 from zope.component import getUtility
 from zope.interface import implements
 
@@ -12,7 +12,7 @@ class MonitorNotifier(object):
     """Default monitor notifier. Sends notification emails.
     """
 
-    implements(IReportNotifier)
+    implements(IMonitorNotifier)
 
     def __init__(self, portal):
         self.context = portal
