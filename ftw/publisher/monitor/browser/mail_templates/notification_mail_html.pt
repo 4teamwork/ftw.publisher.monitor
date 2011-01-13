@@ -7,6 +7,9 @@
         <h1 tal:content="options/subject">
         </h1>
 
+        <a tal:attributes="href options/portal/absolute_url"
+           tal:content="options/portal/absolute_url" />
+
         <p i18n:translate="warning_mail_message">
             The amunt of jobs in the publisher queue of the senders host
             reached the threshold. The queue may be blocked!

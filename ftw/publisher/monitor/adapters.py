@@ -58,7 +58,8 @@ class MonitorNotifier(object):
         """
 
         data = {'jobs_in_queue': self.queue.countJobs(),
-                'subject': self.get_subject()}
+                'subject': self.get_subject(),
+                'portal': self.context}
         return data
 
     def render_template(self):
