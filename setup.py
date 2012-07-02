@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = open('ftw/publisher/monitor/version.txt').read().strip()
+version = '2.0b1-dev'
 maintainer = 'Jonas Baumann'
 
 tests_require = [
