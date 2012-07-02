@@ -48,12 +48,12 @@ def email_addresses_validator(value):
 
     """
 
-    if value == None:
+    if value is None:
         return True
 
-    expr = re.compile(r"^(\w&.%#$&'\*+-/=?^_`{}|~]+!)*[\w&.%#$&'\*+-/=" +\
-                          "?^_`{}|~]+@(([0-9a-z]([0-9a-z-]*[0-9a-z])?" +\
-                          "\.)+[a-z]{2,6}|([0-9]{1,3}\.){3}[0-9]{1,3})$",
+    expr = re.compile(r"^(\w&.%#$&'\*+-/=?^_`{}|~]+!)*[\w&.%#$&'\*+-/=" +
+                      "?^_`{}|~]+@(([0-9a-z]([0-9a-z-]*[0-9a-z])?" +
+                      "\.)+[a-z]{2,6}|([0-9]{1,3}\.){3}[0-9]{1,3})$",
                       re.IGNORECASE)
 
     addresses = value.strip().split('\n')

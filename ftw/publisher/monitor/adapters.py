@@ -16,6 +16,8 @@ class MonitorNotifier(object):
 
     def __init__(self, portal):
         self.context = portal
+        self.config = None
+        self.queue = None
 
     def __call__(self, config, queue):
         self.config = config
