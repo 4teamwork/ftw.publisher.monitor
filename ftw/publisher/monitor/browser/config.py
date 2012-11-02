@@ -4,6 +4,7 @@ from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from ftw.publisher.monitor import _
 from ftw.publisher.monitor.interfaces import IMonitorConfigurationSchema
+from ftw.publisher.monitor.utils import email_addresses_validator
 from persistent.dict import PersistentDict
 from plone.fieldsets.form import FieldsetsEditForm
 from zope.annotation.interfaces import IAnnotations
@@ -11,57 +12,9 @@ from zope.app.component.hooks import getSite
 from zope.component import adapts
 from zope.formlib import form
 from zope.interface import implements
-import re
 
 
 ANNOTATIONS_KEY = 'ftw.publisher.monitor-configuration'
-
-
-def email_addresses_validator(value):
-    """Validator for validating the e-mail addresses field.
-    `value` is a string of carriage-return-seperated bulk of e-mail addresses.
-    Returns `True` if all addresses are valid, otherwise `False`.
-
-    >>> from ftw.publisher.monitor.browser import config
-    >>> validate = config.email_addresses_validator
-
-    Some tests:
-
-    >>> validate('hugo.boss@web.de')
-    True
-    >>> validate('''hugo.boss@web.de
-    ... hugo.boss@web.de''')
-    True
-    >>> validate('1my@mail.de')
-    True
-    >>> validate('info@4teamwork.ch')
-    True
-    >>> validate('my-very.special-mail@ver.y.spec.ial.do.main.com')
-    True
-
-    Local E-Mail addresses work too:
-
-    >>> validate('me@home.local')
-    True
-    >>> validate('me@local')
-    False
-
-    """
-
-    if value is None:
-        return True
-
-    expr = re.compile(r"^(\w&.%#$&'\*+-/=?^_`{}|~]+!)*[\w&.%#$&'\*+-/=" +
-                      "?^_`{}|~]+@(([0-9a-z]([0-9a-z-]*[0-9a-z])?" +
-                      "\.)+[a-z]{2,6}|([0-9]{1,3}\.){3}[0-9]{1,3})$",
-                      re.IGNORECASE)
-
-    addresses = value.strip().split('\n')
-    for addr in addresses:
-        addr = addr.strip()
-        if not expr.match(addr):
-            return False
-    return True
 
 
 class MonitorConfigurationAdapter(SchemaAdapterBase):
