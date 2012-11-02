@@ -21,7 +21,7 @@
         />
 
     <adapter
-        for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+        for="*"
         provides="ftw.publisher.monitor.interfaces.IMonitorNotifier"
         factory=".adapters.MonitorNotifier"
         />
