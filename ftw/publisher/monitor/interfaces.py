@@ -21,12 +21,12 @@ class IMonitorConfigurationSchema(Interface):
         title=_(u'label_receivers', default=u'Receivers'),
         description=_(u'help_receivers',
                       default=u'Enter one e-mail address per line.'),
-        required=True)
+        required=False)
 
     threshold = schema.Int(
-         title=_(u'label_threshold', default=u'Queue size threshold'),
-         description=_(u'help_threshold',
-                       default=u'If the amount jobs in the queue is bigger '
-                       'than this value, a alert will be sent.'),
-         default=100,
-         required=True)
+        title=_(u'label_threshold', default=u'Queue size threshold'),
+        description=_(u'help_threshold',
+                      default=u'If the amount jobs in the queue is bigger '
+                      'than this value, a alert will be sent.'),
+        default=100,
+        required=True)
