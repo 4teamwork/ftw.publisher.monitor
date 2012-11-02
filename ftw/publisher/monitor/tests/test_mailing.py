@@ -1,13 +1,7 @@
 from Products.CMFCore.utils import getToolByName
-from ftw.publisher.core.states import ObjectNotFoundForMovingWarning
-from ftw.publisher.core.states import ObjectUpdatedState
-from ftw.publisher.core.states import UIDPathMismatchError
-from ftw.publisher.monitor import utils
 from ftw.publisher.monitor.interfaces import IMonitorConfigurationSchema
 from ftw.publisher.monitor.testing import MONITOR_FUNCTIONAL_TESTING
 from ftw.publisher.sender.interfaces import IQueue
-from ftw.publisher.sender.persistence import Job
-from ftw.publisher.sender.persistence import Realm
 from ftw.testing import MockTestCase
 from mocker import ARGS, KWARGS
 from plone.app.testing import TEST_USER_ID
