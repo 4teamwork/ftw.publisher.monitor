@@ -1,5 +1,6 @@
 import re
 
+
 def email_addresses_validator(value):
     """Validator for validating e-mail addresses.
     `value` is a string of carriage-return-seperated bulk of e-mail addresses.
