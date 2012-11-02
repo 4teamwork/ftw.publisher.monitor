@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2010-11-29 12:28+0000\n"
+"POT-Creation-Date: 2012-11-02 16:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,72 +18,72 @@ msgstr ""
 "Domain: ftw.publisher.monitor\n"
 
 #. Default: "Cancel"
-#: ftw.publisher.monitor/ftw/publisher/monitor/browser/config.py:142
+#: ./ftw/publisher/monitor/browser/config.py:102
 msgid "button_cancel"
 msgstr ""
 
 #. Default: "Save"
-#: ftw.publisher.monitor/ftw/publisher/monitor/browser/config.py:127
+#: ./ftw/publisher/monitor/browser/config.py:87
 msgid "button_save"
 msgstr ""
 
 #. Default: "At least one of the defined addresses are not valid."
-#: ftw.publisher.monitor/ftw/publisher/monitor/browser/config.py:132
+#: ./ftw/publisher/monitor/browser/config.py:92
 msgid "error_invalid_addresses"
 msgstr ""
 
 #. Default: "Publisher monitor configuration"
-#: ftw.publisher.monitor/ftw/publisher/monitor/browser/config.py:121
+#: ./ftw/publisher/monitor/browser/config.py:77
 msgid "help_monitor_configuration"
 msgstr ""
 
 #. Default: "Enter one e-mail address per line."
-#: ftw.publisher.monitor/ftw/publisher/monitor/interfaces.py:22
+#: ./ftw/publisher/monitor/interfaces.py:22
 msgid "help_receivers"
 msgstr ""
 
 #. Default: "If the amount jobs in the queue is bigger than this value, a alert will be sent."
-#: ftw.publisher.monitor/ftw/publisher/monitor/interfaces.py:28
+#: ./ftw/publisher/monitor/interfaces.py:28
 msgid "help_threshold"
 msgstr ""
 
 #. Default: "Monitor configuration"
-#: ftw.publisher.monitor/ftw/publisher/monitor/browser/config.py:119
+#: ./ftw/publisher/monitor/browser/config.py:75
 msgid "label_monitor_configuration"
 msgstr ""
 
 #. Default: "Notification enabled"
-#: ftw.publisher.monitor/ftw/publisher/monitor/interfaces.py:17
+#: ./ftw/publisher/monitor/interfaces.py:17
 msgid "label_notification_enabled"
 msgstr ""
 
 #. Default: "Receivers"
-#: ftw.publisher.monitor/ftw/publisher/monitor/interfaces.py:21
+#: ./ftw/publisher/monitor/interfaces.py:21
 msgid "label_receivers"
 msgstr ""
 
 #. Default: "Queue size threshold"
-#: ftw.publisher.monitor/ftw/publisher/monitor/interfaces.py:27
+#: ./ftw/publisher/monitor/interfaces.py:27
 msgid "label_threshold"
 msgstr ""
 
 #. Default: "Monitor configuration"
-#: ftw.publisher.monitor/ftw/publisher/monitor/viewlets/link.pt:3
+#: ./ftw/publisher/monitor/viewlets/link.pt:3
 msgid "link_monitor_configuration"
 msgstr ""
 
 #. Default: "Publisher monitor warning: ${site}"
-#: ftw.publisher.monitor/ftw/publisher/monitor/adapters.py:52
+#: ./ftw/publisher/monitor/adapters.py:54
 msgid "mail_subject"
 msgstr ""
 
 #. Default: "Jobs in the queue:"
-#: ftw.publisher.monitor/ftw/publisher/monitor/browser/mail_templates/notification_mail_html.pt:17
+#: ./ftw/publisher/monitor/browser/mail_templates/notification_mail_html.pt:20
 msgid "mail_th_jobs_in_queue"
 msgstr ""
 
-#. Default: "The amunt of jobs in the publisher queue of the senders host reached the threshold. The queue may be blocked!"
-#: ftw.publisher.monitor/ftw/publisher/monitor/browser/mail_templates/notification_mail_html.pt:10
+#. Default: "The amount of jobs in the publisher queue of the senders host reached the threshold. The queue may be blocked!"
+#: ./ftw/publisher/monitor/browser/mail_templates/notification_mail_html.pt:13
 msgid "warning_mail_message"
 msgstr ""
 
