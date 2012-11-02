@@ -5,11 +5,13 @@ version = '2.0b1-dev'
 maintainer = 'Jonas Baumann'
 
 tests_require = [
+    'pyquery',
+    'unittest2',
+    'mocker',
+    'zope.configuration',
+    'plone.testing',
     'ftw.testing',
     'plone.app.testing',
-    'plone.testing',
-    'unittest2',
-    'pyquery',
     ]
 
 
@@ -44,9 +46,24 @@ setup(name='ftw.publisher.monitor',
 
       install_requires=[
         'setuptools',
-        'z3c.autoinclude',
-        'ftw.publisher.sender',
+
+        'zope.annotation',
+        'zope.component',
+        'zope.formlib',
+        'zope.i18nmessageid',
+        'zope.interface',
+        'zope.schema',
+        'zope.app.component',
+        'ZODB3',
+        'Zope2',
+
         'plone.fieldsets',
+        'plone.app.layout',
+        'Products.CMFCore',
+        'Products.CMFDefault',
+        'Products.CMFPlone',
+
+        'ftw.publisher.sender',
         ],
 
       tests_require=tests_require,
