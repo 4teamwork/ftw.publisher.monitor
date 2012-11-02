@@ -11,7 +11,7 @@
            tal:content="options/portal/absolute_url" />
 
         <p i18n:translate="warning_mail_message">
-            The amunt of jobs in the publisher queue of the senders host
+            The amount of jobs in the publisher queue of the senders host
             reached the threshold. The queue may be blocked!
         </p>
 
