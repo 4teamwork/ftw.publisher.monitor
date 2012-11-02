@@ -5,9 +5,7 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="ftw.publisher.monitor">
 
-    <!-- Include configuration for dependencies listed in setup.py -->
-    <include package="z3c.autoinclude" file="meta.zcml" />
-    <includeDependencies package="." />
+    <include package="ftw.publisher.sender" />
 
     <i18n:registerTranslations directory="locales" />
 
