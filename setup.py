@@ -5,7 +5,10 @@ version = '2.0b1-dev'
 maintainer = 'Jonas Baumann'
 
 tests_require = [
-    'collective.testcaselayer',
+    'ftw.testing',
+    'plone.app.testing',
+    'plone.testing',
+    'unittest2',
     ]
 
 
