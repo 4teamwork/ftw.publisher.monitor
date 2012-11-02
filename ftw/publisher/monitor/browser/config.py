@@ -17,7 +17,7 @@ from zope.interface import implements
 ANNOTATIONS_KEY = 'ftw.publisher.monitor-configuration'
 
 
-class MonitorConfigurationAdapter(SchemaAdapterBase):
+class MonitorConfigurationAdapter(SchemaAdapterBase, object):
     """Stores the monitor configuration
     """
 
@@ -79,6 +79,10 @@ class MonitorConfigurationForm(FieldsetsEditForm):
 
     form_name = label
     form_fields = form.FormFields(IMonitorConfigurationSchema)
+
+    def __init__(self, *args, **kwargs):
+        super(MonitorConfigurationForm, self).__init__(*args, **kwargs)
+        self.status = None
 
     @form.action(_(u'button_save', default=u'Save'))
     def handle_edit_action(self, action, data):
