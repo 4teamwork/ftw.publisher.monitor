@@ -27,8 +27,8 @@ Links
 
 - github project repository: https://github.com/4teamwork/ftw.publisher.monitor
 - Main publisher github project repository: https://github.com/4teamwork/ftw.publisher.sender
-- Issue tracker: https://github.com/4teamwork/ftw.publisher.monitor/issues
-- Package on pypi: http://pypi.python.org/pypi/ftw.publisher.monitor
+- Issues: https://github.com/4teamwork/ftw.publisher.monitor/issues
+- Pypi: http://pypi.python.org/pypi/ftw.publisher.monitor
 - Continuous integration: https://jenkins.4teamwork.ch/search?q=ftw.publisher.monitor
 
 
