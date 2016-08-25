@@ -1,3 +1,4 @@
+from Acquisition import aq_base
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 from ftw.publisher.monitor.handlers import invoke_notification
@@ -59,7 +60,10 @@ class TestEventhandler(MockTestCase):
             self.queue.popJob()
 
         for _i in range(amount_of_jobs):
-            self.queue.createJob('push', self.folder, self.user)
+            # Remove acquisition wrapper from "self.user" in order to
+            # prevent the following error:
+            #   TypeError: Can't pickle objects in acquisition wrappers.
+            self.queue.createJob('push', self.folder, aq_base(self.user))
 
     def test_eventhandler_calls_notifier(self):
         self.config.set_threshold(2)
