@@ -1,3 +1,4 @@
+from Acquisition import aq_base
 from Products.CMFCore.utils import getToolByName
 from ftw.publisher.monitor.interfaces import IMonitorConfigurationSchema
 from ftw.publisher.monitor.testing import MONITOR_FUNCTIONAL_TESTING
@@ -61,7 +62,10 @@ class TestEmailNotification(MockTestCase):
             self.queue.popJob()
 
         for _i in range(amount_of_jobs):
-            self.queue.createJob('push', self.folder, self.user)
+            # Remove acquisition wrapper from "self.user" in order to
+            # prevent the following error:
+            #   TypeError: Can't pickle objects in acquisition wrappers.
+            self.queue.createJob('push', self.folder, aq_base(self.user))
 
     def get_table_from_message(self, message):
         message = pq(str(message))
