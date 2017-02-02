@@ -5,6 +5,8 @@ Changelog
 2.0b1 (unreleased)
 ------------------
 
+- Drop Plone 4.2 support. [jone]
+
 - Drop compatibility with Plone 4.1.
   Add compatibility with Plone 4.3. [mbaechtold]
 
