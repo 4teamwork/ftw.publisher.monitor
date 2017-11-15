@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-11-15 14:09+0000\n"
+"POT-Creation-Date: 2017-11-15 14:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,6 +27,11 @@ msgstr ""
 #. Default: "At least one of the defined addresses are not valid."
 #: ./ftw/publisher/monitor/browser/config.py:101
 msgid "error_invalid_addresses"
+msgstr ""
+
+#. Default: "If the asynchronous extraction takes longer than this amount of seconds, it is considered to not work. Candidates are 0-sized jobs, measurement is the age of the modification time of the data file."
+#: ./ftw/publisher/monitor/interfaces.py:37
+msgid "help_max_extraction_duration_seconds"
 msgstr ""
 
 #. Default: "Publisher monitor configuration"

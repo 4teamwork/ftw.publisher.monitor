@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-11-15 14:09+0000\n"
+"POT-Creation-Date: 2017-11-15 14:42+0000\n"
 "PO-Revision-Date: 2017-11-15 15:10+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,6 +26,11 @@ msgstr "Speichern"
 msgid "error_invalid_addresses"
 msgstr "Mindestens eine der angegebenen E-Mail Adressen ist ungültig."
 
+#. Default: "If the asynchronous extraction takes longer than this amount of seconds, it is considered to not work. Candidates are 0-sized jobs, measurement is the age of the modification time of the data file."
+#: ./ftw/publisher/monitor/interfaces.py:37
+msgid "help_max_extraction_duration_seconds"
+msgstr "Wenn das asynchrone Extrahieren der Daten für einen Job mehr als so viel Sekunden benötigt, wird es als fehlerhaft eingeschätzt. Kandidaten sind Jobs welche eine Grösse von 0 Bytes haben (d.H. die Extraktion ist pendent), und deren Datendatei mehr als so viele Sekunden leer bereitsteht."
+
 #. Default: "Publisher monitor configuration"
 #: ./ftw/publisher/monitor/browser/config.py:86
 msgid "help_monitor_configuration"
@@ -39,7 +44,7 @@ msgstr "Geben Sie eine E-Mail Adresse pro Zeile an."
 #. Default: "If the amount jobs in the queue is bigger than this value, a alert will be sent."
 #: ./ftw/publisher/monitor/interfaces.py:28
 msgid "help_threshold"
-msgstr "Wenn die Gröss der Warteschleife diesen Wert überschreitet, wird die Benachrichtigung ausgelöst."
+msgstr "Wenn die Grösse der Warteschleife diesen Wert überschreitet, wird die Benachrichtigung ausgelöst."
 
 #. Default: "Maximum extraction duration (seconds)"
 #: ./ftw/publisher/monitor/interfaces.py:35
@@ -90,4 +95,3 @@ msgstr "Die Anzahl wartender Aufträge in der Warteschleife hat den Grenzwert ü
 #: ./ftw/publisher/monitor/handlers.py:55
 msgid "warning_mail_message_extraction_problem"
 msgstr "Die Extraktion eines Publisher-Jobs hat nach ${age} Sekunden nicht geklappt. Dies verstopft vermutlich die Warteschleife."
-
