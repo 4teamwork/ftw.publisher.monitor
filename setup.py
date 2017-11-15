@@ -2,7 +2,6 @@ from setuptools import setup, find_packages
 import os
 
 version = '2.0b1-dev'
-maintainer = 'Jonas Baumann'
 
 tests_require = [
     'pyquery',
@@ -36,7 +35,6 @@ setup(name='ftw.publisher.monitor',
       keywords='ftw publisher monitoring',
       author='4teamwork AG',
       author_email='mailto:info@4teamwork.ch',
-      maintainer=maintainer,
       url='https://github.com/4teamwork/ftw.publisher.monitor',
 
       license='GPL2',
