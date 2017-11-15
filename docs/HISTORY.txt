@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.0b1 (unreleased)
+1.1.1 (2017-11-15)
 ------------------
 
 - Add support for monitor failed exctractions. [jone]
