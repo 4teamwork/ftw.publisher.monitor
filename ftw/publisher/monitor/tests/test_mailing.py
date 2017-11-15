@@ -11,6 +11,8 @@ from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from Products.CMFCore.utils import getToolByName
 from pyquery import PyQuery as pq
+from time import time
+import os
 import re
 
 
@@ -101,6 +103,35 @@ class TestEmailNotification(MockTestCase):
 
         self.assertEqual(
             [['Jobs in the queue:', '3']],
+            browser.css('table').first.lists())
+
+    @browsing
+    def test_notification_sent_when_extraction_takes_too_long(self, browser):
+        self.config.set_max_extraction_duration_seconds(10)  # 10 seconds
+        self.stub_current_queue_length(1)
+        job = self.queue.getJobs()[0]
+        one_minute_ago = time() - 60
+        open(job.dataFile, 'w+').close()  # empty the file
+        os.utime(job.dataFile, (one_minute_ago, one_minute_ago))  # set the mtime
+
+        self.portal.restrictedTraverse('@@publisher.executeQueue')()
+
+        self.assertEqual(len(self.mails), 1)
+        args, kwargs = self.mails.pop()
+
+        self.assertEqual(kwargs.get('mfrom'), 'test@plone.org')
+        self.assertEqual(kwargs.get('mto'), 'hugo@boss.com')
+        self.assertEqual(kwargs.get('subject'),
+                         u'Publisher monitor warning: Plone site')
+
+        browser.open_html(args[0].get_payload(decode=True))
+        self.assertEqual(
+            'Extraction of a publisher job failed for 60 seconds.'
+            ' This will probably jam the queue.',
+            browser.css('.reason').first.text)
+
+        self.assertEqual(
+            [['Jobs in the queue:', '1']],
             browser.css('table').first.lists())
 
     def test_notification_is_sent_to_each_receiver(self):

@@ -70,6 +70,7 @@ class TestConfig(TestCase):
                 'my@test.local',
                 'foo@bar.com'))
         self.browser.getControl(name='form.threshold').value = '75'
+        self.browser.getControl(name='form.max_extraction_duration_seconds').value = '777'
 
         self.browser.getControl('Save').click()
         self.assertEqual(self.browser.url, self.config_url)
@@ -80,6 +81,7 @@ class TestConfig(TestCase):
         self.assertEqual(config.get_receivers(), [
                 'my@test.local', 'foo@bar.com'])
         self.assertEqual(config.threshold, 75)
+        self.assertEqual(config.max_extraction_duration_seconds, 777)
 
     def test_receiver_mail_validation(self):
         self.assertEqual(

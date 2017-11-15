@@ -70,7 +70,7 @@ class TestEventhandler(MockTestCase):
         self.stub_current_queue_length(3)
         event = self.create_dummy(queue=self.queue)
 
-        self.expect(self.notifier(ANY, ANY))
+        self.expect(self.notifier(ANY, ANY, ANY))
         self.replay()
 
         invoke_notification(self.portal, event)
@@ -79,7 +79,7 @@ class TestEventhandler(MockTestCase):
         self.config.set_threshold(2)
         self.stub_current_queue_length(3)
 
-        self.expect(self.notifier(ANY, ANY))
+        self.expect(self.notifier(ANY, ANY, ANY))
         self.replay()
 
         self.portal.unrestrictedTraverse('@@publisher.executeQueue')()
@@ -90,7 +90,7 @@ class TestEventhandler(MockTestCase):
 
         self.config.set_enabled(False)
 
-        self.expect(self.notifier(ANY, ANY)).count(0)
+        self.expect(self.notifier(ANY, ANY, ANY)).count(0)
         self.replay()
 
         self.portal.unrestrictedTraverse('@@publisher.executeQueue')()

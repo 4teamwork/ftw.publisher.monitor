@@ -65,6 +65,15 @@ class MonitorConfigurationAdapter(SchemaAdapterBase, object):
 
     threshold = property(get_threshold, set_threshold)
 
+    def get_max_extraction_duration_seconds(self):
+        return self.storage.get('max_extraction_duration_seconds', 3 * 60)
+
+    def set_max_extraction_duration_seconds(self, value):
+        self.storage['max_extraction_duration_seconds'] = int(value)
+
+    max_extraction_duration_seconds = property(get_max_extraction_duration_seconds,
+                                               set_max_extraction_duration_seconds)
+
 
 class MonitorConfigurationForm(FieldsetsEditForm):
     """Monitor configuration form
