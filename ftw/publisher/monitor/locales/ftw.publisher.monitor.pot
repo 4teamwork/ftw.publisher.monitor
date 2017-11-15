@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-11-02 16:27+0000\n"
+"POT-Creation-Date: 2017-11-15 13:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,10 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: ftw.publisher.monitor\n"
 
 #. Default: "Cancel"
 #: ./ftw/publisher/monitor/browser/config.py:102
@@ -73,17 +70,17 @@ msgid "link_monitor_configuration"
 msgstr ""
 
 #. Default: "Publisher monitor warning: ${site}"
-#: ./ftw/publisher/monitor/adapters.py:54
+#: ./ftw/publisher/monitor/adapters.py:55
 msgid "mail_subject"
 msgstr ""
 
 #. Default: "Jobs in the queue:"
-#: ./ftw/publisher/monitor/browser/mail_templates/notification_mail_html.pt:20
+#: ./ftw/publisher/monitor/browser/mail_templates/notification_mail_html.pt:17
 msgid "mail_th_jobs_in_queue"
 msgstr ""
 
 #. Default: "The amount of jobs in the publisher queue of the senders host reached the threshold. The queue may be blocked!"
-#: ./ftw/publisher/monitor/browser/mail_templates/notification_mail_html.pt:13
+#: ./ftw/publisher/monitor/handlers.py:18
 msgid "warning_mail_message"
 msgstr ""
 
