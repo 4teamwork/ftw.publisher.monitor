@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '2.0b1-dev'
+version = '1.1.0'
 
 tests_require = [
     'pyquery',
