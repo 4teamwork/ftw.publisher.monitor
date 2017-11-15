@@ -30,3 +30,14 @@ class IMonitorConfigurationSchema(Interface):
                       'than this value, a alert will be sent.'),
         default=100,
         required=True)
+
+    max_extraction_duration_seconds = schema.Int(
+        title=_(u'label_max_extraction_duration_seconds',
+                default=u'Maximum extraction duration (seconds)'),
+        description=_(u'help_threshold',
+                      default=u'If the asynchronous extraction takes longer than this'
+                      u' amount of seconds, it is considered to not work.'
+                      u' Candidates are 0-sized jobs, measurement is the age of the'
+                      u' modification time of the data file.'),
+        default=3 * 60,
+        required=True)

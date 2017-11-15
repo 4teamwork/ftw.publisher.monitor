@@ -19,9 +19,10 @@ class MonitorNotifier(object):
         self.config = None
         self.queue = None
 
-    def __call__(self, config, queue):
+    def __call__(self, config, queue, reason):
         self.config = config
         self.queue = queue
+        self.reason = reason
         self.send_email()
 
     def send_email(self):
@@ -61,7 +62,8 @@ class MonitorNotifier(object):
 
         data = {'jobs_in_queue': self.queue.countJobs(),
                 'subject': self.get_subject(),
-                'portal': self.context}
+                'portal': self.context,
+                'reason': self.reason}
         return data
 
     def render_template(self):

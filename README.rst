@@ -21,6 +21,19 @@ Usage
 - Configure the report in the publisher control panel.
 
 
+Failed extraction monitoring
+----------------------------
+
+When the publisher is set up with an asynchronous extraction queue (e.g. with redis),
+the extraction may break.
+This is possible because the extraction is asynchronous and thus not in the same
+transaction as the publisher job is created.
+Therefore creating the publisher job may work, but executing the extraction job may fail.
+
+For mitigating that problem we are monitoring the jobs and warn whenever a job has still
+a 0-sized job file and the job file is older than the configured threshold.
+
+
 
 Links
 -----

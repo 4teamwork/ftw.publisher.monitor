@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2012-11-02 16:27+0000\n"
-"PO-Revision-Date: 2010-11-29 13:28+0100\n"
+"POT-Creation-Date: 2017-11-15 14:09+0000\n"
+"PO-Revision-Date: 2017-11-15 15:10+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -10,25 +10,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: DOMAIN\n"
 
 #. Default: "Cancel"
-#: ./ftw/publisher/monitor/browser/config.py:102
+#: ./ftw/publisher/monitor/browser/config.py:111
 msgid "button_cancel"
 msgstr "Abbrechen"
 
 #. Default: "Save"
-#: ./ftw/publisher/monitor/browser/config.py:87
+#: ./ftw/publisher/monitor/browser/config.py:96
 msgid "button_save"
 msgstr "Speichern"
 
 #. Default: "At least one of the defined addresses are not valid."
-#: ./ftw/publisher/monitor/browser/config.py:92
+#: ./ftw/publisher/monitor/browser/config.py:101
 msgid "error_invalid_addresses"
 msgstr "Mindestens eine der angegebenen E-Mail Adressen ist ungültig."
 
 #. Default: "Publisher monitor configuration"
-#: ./ftw/publisher/monitor/browser/config.py:77
+#: ./ftw/publisher/monitor/browser/config.py:86
 msgid "help_monitor_configuration"
 msgstr "Konfiguration der Überwachung der Publisher-Warteschleife"
 
@@ -42,8 +41,13 @@ msgstr "Geben Sie eine E-Mail Adresse pro Zeile an."
 msgid "help_threshold"
 msgstr "Wenn die Gröss der Warteschleife diesen Wert überschreitet, wird die Benachrichtigung ausgelöst."
 
+#. Default: "Maximum extraction duration (seconds)"
+#: ./ftw/publisher/monitor/interfaces.py:35
+msgid "label_max_extraction_duration_seconds"
+msgstr "Maximale Dauer für Datenextraktion (Sekunden)"
+
 #. Default: "Monitor configuration"
-#: ./ftw/publisher/monitor/browser/config.py:75
+#: ./ftw/publisher/monitor/browser/config.py:84
 msgid "label_monitor_configuration"
 msgstr "Konfiguration Überwachung"
 
@@ -68,16 +72,22 @@ msgid "link_monitor_configuration"
 msgstr "Konfiguration Überwachung"
 
 #. Default: "Publisher monitor warning: ${site}"
-#: ./ftw/publisher/monitor/adapters.py:54
+#: ./ftw/publisher/monitor/adapters.py:55
 msgid "mail_subject"
 msgstr "Warnung Publisher Überwachung auf ${site}"
 
 #. Default: "Jobs in the queue:"
-#: ./ftw/publisher/monitor/browser/mail_templates/notification_mail_html.pt:20
+#: ./ftw/publisher/monitor/browser/mail_templates/notification_mail_html.pt:17
 msgid "mail_th_jobs_in_queue"
 msgstr "Anzahl Aufträge in der Warteschleife:"
 
 #. Default: "The amount of jobs in the publisher queue of the senders host reached the threshold. The queue may be blocked!"
-#: ./ftw/publisher/monitor/browser/mail_templates/notification_mail_html.pt:13
+#: ./ftw/publisher/monitor/handlers.py:28
 msgid "warning_mail_message"
 msgstr "Die Anzahl wartender Aufträge in der Warteschleife hat den Grenzwert überschritten. Möglicherweise liegt ein Problem mit der Warteschleife vor."
+
+#. Default: "Extraction of a publisher job failed for ${age} seconds. This will probably jam the queue."
+#: ./ftw/publisher/monitor/handlers.py:55
+msgid "warning_mail_message_extraction_problem"
+msgstr "Die Extraktion eines Publisher-Jobs hat nach ${age} Sekunden nicht geklappt. Dies verstopft vermutlich die Warteschleife."
+

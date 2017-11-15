@@ -1,15 +1,18 @@
 from Acquisition import aq_base
-from Products.CMFCore.utils import getToolByName
 from ftw.publisher.monitor.interfaces import IMonitorConfigurationSchema
 from ftw.publisher.monitor.testing import MONITOR_FUNCTIONAL_TESTING
 from ftw.publisher.sender.interfaces import IQueue
+from ftw.testbrowser import browsing
 from ftw.testing import MockTestCase
 from mocker import ARGS, KWARGS
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import login
 from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
+from Products.CMFCore.utils import getToolByName
 from pyquery import PyQuery as pq
+from time import time
+import os
 import re
 
 
@@ -76,7 +79,8 @@ class TestEmailNotification(MockTestCase):
         message = message.replace('> <', '><')
         return message
 
-    def test_notification_sent_after_executing_queue(self):
+    @browsing
+    def test_notification_sent_after_executing_queue_when_queue_too_large(self, browser):
         self.config.set_threshold(2)
         self.stub_current_queue_length(3)
 
@@ -90,14 +94,45 @@ class TestEmailNotification(MockTestCase):
         self.assertEqual(kwargs.get('subject'),
                          u'Publisher monitor warning: Plone site')
 
-        message = self.normalize_message(str(args[0]))
-        self.assertIn('The amount of jobs in the publisher queue of '
-                      'the senders host reached the threshold. '
-                      'The queue may be blocked!', message)
+        browser.open_html(args[0].get_payload(decode=True))
+        self.assertEqual(
+            'The amount of jobs in the publisher queue of '
+            'the senders host reached the threshold. '
+            'The queue may be blocked!',
+            browser.css('.reason').first.text)
 
-        table = self.get_table_from_message(message)
-        self.assertIn('<tr><th>Jobs in the queue:</th><td>3</td></tr>',
-                      table)
+        self.assertEqual(
+            [['Jobs in the queue:', '3']],
+            browser.css('table').first.lists())
+
+    @browsing
+    def test_notification_sent_when_extraction_takes_too_long(self, browser):
+        self.config.set_max_extraction_duration_seconds(10)  # 10 seconds
+        self.stub_current_queue_length(1)
+        job = self.queue.getJobs()[0]
+        one_minute_ago = time() - 60
+        open(job.dataFile, 'w+').close()  # empty the file
+        os.utime(job.dataFile, (one_minute_ago, one_minute_ago))  # set the mtime
+
+        self.portal.restrictedTraverse('@@publisher.executeQueue')()
+
+        self.assertEqual(len(self.mails), 1)
+        args, kwargs = self.mails.pop()
+
+        self.assertEqual(kwargs.get('mfrom'), 'test@plone.org')
+        self.assertEqual(kwargs.get('mto'), 'hugo@boss.com')
+        self.assertEqual(kwargs.get('subject'),
+                         u'Publisher monitor warning: Plone site')
+
+        browser.open_html(args[0].get_payload(decode=True))
+        self.assertEqual(
+            'Extraction of a publisher job failed for 60 seconds.'
+            ' This will probably jam the queue.',
+            browser.css('.reason').first.text)
+
+        self.assertEqual(
+            [['Jobs in the queue:', '1']],
+            browser.css('table').first.lists())
 
     def test_notification_is_sent_to_each_receiver(self):
         self.config.set_receivers_plain('\n'.join((

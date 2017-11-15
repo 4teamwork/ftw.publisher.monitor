@@ -9,6 +9,7 @@ tests_require = [
     'mocker',
     'zope.configuration',
     'plone.testing',
+    'ftw.testbrowser',
     'ftw.testing',
     'plone.app.testing',
     ]
