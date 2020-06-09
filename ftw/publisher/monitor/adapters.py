@@ -47,9 +47,9 @@ class MonitorNotifier(object):
         msg['From'] = header_from
         msg['Subject'] = header_subject
 
-        for rcpt in self.config.get_receivers():
+        for rcpt in self.config.receivers:
             msg['To'] = rcpt
-            mh.secureSend(msg, mto=rcpt, mfrom=from_addr, subject=subject)
+            mh.send(msg, mto=rcpt, mfrom=from_addr, subject=subject, immediate=True)
 
     def get_subject(self):
         return _(u'mail_subject',

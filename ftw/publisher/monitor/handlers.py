@@ -4,6 +4,8 @@ from ftw.publisher.monitor.interfaces import IMonitorNotifier
 from time import time
 from zope.component import getAdapter
 import os.path
+from zope.component import getUtility
+from plone.registry.interfaces import IRegistry
 
 
 def invoke_notification(obj, event):
@@ -11,8 +13,9 @@ def invoke_notification(obj, event):
     `IReportNotifier` adapter.
 
     """
-    config = IMonitorConfigurationSchema(obj)
-    if not config.enabled or not len(config.get_receivers()):
+    registry = getUtility(IRegistry)
+    config = registry.forInterface(IMonitorConfigurationSchema)
+    if not config.enabled or not len(config.receivers):
         return
 
     monitor_queue_length(obj, event.queue, config)
