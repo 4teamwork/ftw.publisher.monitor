@@ -15,12 +15,15 @@ class IMonitorConfigurationSchema(Interface):
 
     enabled = schema.Bool(
         title=_(u'label_notification_enabled',
-                default=u'Notification enabled'))
+                default=u'Notification enabled'),
+        default=False)
 
-    receivers = schema.Text(
+    receivers = schema.List(
         title=_(u'label_receivers', default=u'Receivers'),
         description=_(u'help_receivers',
                       default=u'Enter one e-mail address per line.'),
+        value_type=schema.TextLine(),
+        default=[],
         required=False)
 
     threshold = schema.Int(
