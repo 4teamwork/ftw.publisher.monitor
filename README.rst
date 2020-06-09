@@ -34,6 +34,14 @@ For mitigating that problem we are monitoring the jobs and warn whenever a job h
 a 0-sized job file and the job file is older than the configured threshold.
 
 
+Upgrade 2.0
+-----------
+
+First you need to install the profile ``ftw.publisher.monitor:default``.
+The profile hasn't existed before and because after the installation of a profile
+all upgradesteps are shown as installed, you have to run it manually or have to
+reenter the data in the config panel.
+
 
 Links
 -----
