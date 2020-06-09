@@ -4,13 +4,11 @@
     xmlns:five="http://namespaces.zope.org/five"
     i18n_domain="ftw.publisher.monitor">
 
-    <adapter factory=".config.MonitorConfigurationAdapter" />
-
     <browser:page
         name="publisher-monitor-config"
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-        class=".config.MonitorConfigurationForm"
         permission="cmf.ManagePortal"
+        class=".config.MonitorConfigurationView"
         />
 
     <browser:page
