@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-11-15 14:42+0000\n"
+"POT-Creation-Date: 2020-06-09 16:11+0000\n"
 "PO-Revision-Date: 2017-11-15 15:10+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,47 +12,51 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 
 #. Default: "Cancel"
-#: ./ftw/publisher/monitor/browser/config.py:111
+#: ./ftw/publisher/monitor/browser/config.py:47
 msgid "button_cancel"
 msgstr "Abbrechen"
 
 #. Default: "Save"
-#: ./ftw/publisher/monitor/browser/config.py:96
+#: ./ftw/publisher/monitor/browser/config.py:32
 msgid "button_save"
 msgstr "Speichern"
 
 #. Default: "At least one of the defined addresses are not valid."
-#: ./ftw/publisher/monitor/browser/config.py:101
+#: ./ftw/publisher/monitor/browser/config.py:39
 msgid "error_invalid_addresses"
 msgstr "Mindestens eine der angegebenen E-Mail Adressen ist ungültig."
 
+#: ./ftw/publisher/monitor/configure.zcml:35
+msgid "ftw.publisher.monitor"
+msgstr ""
+
 #. Default: "If the asynchronous extraction takes longer than this amount of seconds, it is considered to not work. Candidates are 0-sized jobs, measurement is the age of the modification time of the data file."
-#: ./ftw/publisher/monitor/interfaces.py:37
+#: ./ftw/publisher/monitor/interfaces.py:40
 msgid "help_max_extraction_duration_seconds"
 msgstr "Wenn das asynchrone Extrahieren der Daten für einen Job mehr als so viel Sekunden benötigt, wird es als fehlerhaft eingeschätzt. Kandidaten sind Jobs welche eine Grösse von 0 Bytes haben (d.H. die Extraktion ist pendent), und deren Datendatei mehr als so viele Sekunden leer bereitsteht."
 
 #. Default: "Publisher monitor configuration"
-#: ./ftw/publisher/monitor/browser/config.py:86
+#: ./ftw/publisher/monitor/browser/config.py:23
 msgid "help_monitor_configuration"
 msgstr "Konfiguration der Überwachung der Publisher-Warteschleife"
 
 #. Default: "Enter one e-mail address per line."
-#: ./ftw/publisher/monitor/interfaces.py:22
+#: ./ftw/publisher/monitor/interfaces.py:23
 msgid "help_receivers"
 msgstr "Geben Sie eine E-Mail Adresse pro Zeile an."
 
 #. Default: "If the amount jobs in the queue is bigger than this value, a alert will be sent."
-#: ./ftw/publisher/monitor/interfaces.py:28
+#: ./ftw/publisher/monitor/interfaces.py:31
 msgid "help_threshold"
 msgstr "Wenn die Grösse der Warteschleife diesen Wert überschreitet, wird die Benachrichtigung ausgelöst."
 
 #. Default: "Maximum extraction duration (seconds)"
-#: ./ftw/publisher/monitor/interfaces.py:35
+#: ./ftw/publisher/monitor/interfaces.py:38
 msgid "label_max_extraction_duration_seconds"
 msgstr "Maximale Dauer für Datenextraktion (Sekunden)"
 
 #. Default: "Monitor configuration"
-#: ./ftw/publisher/monitor/browser/config.py:84
+#: ./ftw/publisher/monitor/browser/config.py:21
 msgid "label_monitor_configuration"
 msgstr "Konfiguration Überwachung"
 
@@ -62,12 +66,12 @@ msgid "label_notification_enabled"
 msgstr "Überwachung aktiviert"
 
 #. Default: "Receivers"
-#: ./ftw/publisher/monitor/interfaces.py:21
+#: ./ftw/publisher/monitor/interfaces.py:22
 msgid "label_receivers"
 msgstr "Empfänger"
 
 #. Default: "Queue size threshold"
-#: ./ftw/publisher/monitor/interfaces.py:27
+#: ./ftw/publisher/monitor/interfaces.py:30
 msgid "label_threshold"
 msgstr "Grenzwert Grösse der Warteschleife"
 
@@ -87,11 +91,12 @@ msgid "mail_th_jobs_in_queue"
 msgstr "Anzahl Aufträge in der Warteschleife:"
 
 #. Default: "The amount of jobs in the publisher queue of the senders host reached the threshold. The queue may be blocked!"
-#: ./ftw/publisher/monitor/handlers.py:28
+#: ./ftw/publisher/monitor/handlers.py:31
 msgid "warning_mail_message"
 msgstr "Die Anzahl wartender Aufträge in der Warteschleife hat den Grenzwert überschritten. Möglicherweise liegt ein Problem mit der Warteschleife vor."
 
 #. Default: "Extraction of a publisher job failed for ${age} seconds. This will probably jam the queue."
-#: ./ftw/publisher/monitor/handlers.py:55
+#: ./ftw/publisher/monitor/handlers.py:58
 msgid "warning_mail_message_extraction_problem"
 msgstr "Die Extraktion eines Publisher-Jobs hat nach ${age} Sekunden nicht geklappt. Dies verstopft vermutlich die Warteschleife."
+
