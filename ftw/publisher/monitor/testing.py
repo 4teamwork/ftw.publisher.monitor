@@ -1,13 +1,16 @@
+from ftw.builder.testing import BUILDER_LAYER
+from ftw.testing import IS_PLONE_5
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
+from plone.app.testing import applyProfile
 from zope.configuration import xmlconfig
 
 
 class MonitorLayer(PloneSandboxLayer):
 
-    defaultBases = (PLONE_FIXTURE, )
+    defaultBases = (PLONE_FIXTURE, BUILDER_LAYER)
 
     def setUpZope(self, app, configurationContext):
         # Load ZCML
@@ -15,6 +18,12 @@ class MonitorLayer(PloneSandboxLayer):
         xmlconfig.file('configure.zcml',
                        ftw.publisher.monitor,
                        context=configurationContext)
+
+    def setUpPloneSite(self, portal):
+        applyProfile(portal, 'ftw.publisher.monitor:default')
+
+        if IS_PLONE_5:
+            applyProfile(portal, 'plone.app.contenttypes:default')
 
 
 MONITOR_FIXTURE = MonitorLayer()

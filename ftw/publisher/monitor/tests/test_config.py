@@ -1,108 +1,66 @@
 from ftw.publisher.monitor.interfaces import IMonitorConfigurationSchema
-from ftw.publisher.monitor.testing import MONITOR_FUNCTIONAL_TESTING
-from plone.app.testing import SITE_OWNER_NAME
-from plone.app.testing import SITE_OWNER_PASSWORD
-from plone.testing.z2 import Browser
-from unittest2 import TestCase
-import os.path
+from ftw.publisher.monitor.tests import FunctionalTestCase
+from ftw.testbrowser import browsing
+from zope.component import getUtility
+from plone.registry.interfaces import IRegistry
 
 
-class TestConfig(TestCase):
-
-    layer = MONITOR_FUNCTIONAL_TESTING
+class TestConfig(FunctionalTestCase):
 
     def setUp(self):
         super(TestConfig, self).setUp()
-        self.portal = self.layer['portal']
-        self.app = self.layer['app']
-
-        self.browser = Browser(self.app)
-        self.browser.addHeader('Authorization', 'Basic %s:%s' % (
-                SITE_OWNER_NAME, SITE_OWNER_PASSWORD))
-        self.browser.handleErrors = False
         self.portal_url = self.portal.portal_url()
+        self.config_url = '%s/@@publisher-monitor-config' % self.portal_url
+        self.publisher_config_url = '%s/@@publisher-config' % self.portal_url
 
-        self.config_url = os.path.join(self.portal_url,
-                                       '@@publisher-monitor-config')
+        registry = getUtility(IRegistry)
+        self.config = registry.forInterface(IMonitorConfigurationSchema)
 
-    def test_link_is_in_controlpanel(self):
-        self.browser.open('%s/@@publisher-config' % self.portal_url)
+        self.grant('Manager')
 
-        link = self.browser.getLink('Monitor configuration')
-        self.assertNotEqual(
-            link, None,
-            'Monitor configuration not found in control panel')
+    @browsing
+    def test_link_is_in_controlpanel(self, browser):
+        browser.login().open(self.publisher_config_url)
+        link = browser.find_link_by_text('Monitor configuration')
+        self.assertIsNotNone(
+            link, 'Monitor configuration not found in publisher control panel')
 
         link.click()
-        self.assertEqual(self.browser.url, self.config_url,
-                         'Monitor configuration link points to wrong URL')
+        self.assertEqual(browser.url, self.config_url)
 
-    def test_default_configuration(self):
-        self.browser.open(self.config_url)
-        config = IMonitorConfigurationSchema(self.portal)
+    @browsing
+    def test_change_configuration(self, browser):
+        browser.login().open(self.config_url)
+        browser.fill({
+            'Notification enabled': True,
+            'Receivers': 'my@test.local\nfoo@bar.com',
+            'Queue size threshold': '75',
+            'Maximum extraction duration (seconds)': '777',
+        }).submit()
 
-        self.assertFalse(config.enabled)
-        self.assertFalse(self.browser.getControl(name='form.enabled').value)
+        self.assertEqual(browser.url, self.config_url)
 
-        self.assertEqual(config.get_receivers(), [])
-        self.assertEqual(
-            self.browser.getControl(name='form.receivers').value,
-            '')
+        self.assertTrue(self.config.enabled)
+        self.assertEqual(self.config.receivers, ['my@test.local', 'foo@bar.com'])
+        self.assertEqual(self.config.threshold, 75)
+        self.assertEqual(self.config.max_extraction_duration_seconds, 777)
 
-        self.assertEqual(config.get_threshold(), 100)
-        self.assertEqual(
-            self.browser.getControl(name='form.threshold').value,
-            '100')
+    @browsing
+    def test_receiver_mail_validation(self, browser):
+        browser.login().open(self.config_url)
+        browser.fill({
+            'Notification enabled': True,
+            'Receivers': 'not an email',
+        }).submit()
 
-    def test_save_with_defaults(self):
-        self.browser.open(self.config_url)
-        self.assertEqual(
-            self.browser.getControl(name='form.receivers').value, '')
-        self.browser.getControl('Save').click()
-        self.assertEqual(
-            self.browser.getControl(name='form.receivers').value, '')
-        self.assertNotIn('There were errors', self.browser.contents)
-
-    def test_change_configuration(self):
-        self.browser.open(self.config_url)
-        self.browser.getControl(name='form.enabled').value = True
-        self.browser.getControl(name='form.receivers').value = '\n'.join((
-                'my@test.local',
-                'foo@bar.com'))
-        self.browser.getControl(name='form.threshold').value = '75'
-        self.browser.getControl(name='form.max_extraction_duration_seconds').value = '777'
-
-        self.browser.getControl('Save').click()
-        self.assertEqual(self.browser.url, self.config_url)
-        self.assertIn('Updated on', self.browser.contents)
-
-        config = IMonitorConfigurationSchema(self.portal)
-        self.assertTrue(config.enabled)
-        self.assertEqual(config.get_receivers(), [
-                'my@test.local', 'foo@bar.com'])
-        self.assertEqual(config.threshold, 75)
-        self.assertEqual(config.max_extraction_duration_seconds, 777)
-
-    def test_receiver_mail_validation(self):
-        self.assertEqual(
-            IMonitorConfigurationSchema(self.portal).get_receivers(), [])
-
-        self.browser.open(self.config_url)
-        self.browser.getControl(name='form.receivers').value = 'not an email'
-        self.browser.getControl('Save').click()
-
-        self.assertEqual(self.browser.url, self.config_url)
-        self.assertNotIn('Updated on', self.browser.contents)
+        self.assertEqual(browser.url, self.config_url)
         self.assertIn('At least one of the defined addresses are not valid.',
-                      self.browser.contents)
+                      browser.contents)
 
-        self.assertEqual(
-            IMonitorConfigurationSchema(self.portal).get_receivers(), [])
+        self.assertEqual(self.config.receivers, [])
 
-    def test_cancel_form_redirects_to_publisher_config(self):
-        self.browser.open(self.config_url)
-        self.assertEqual(self.browser.url, self.config_url)
-
-        self.browser.getControl('Cancel').click()
-        self.assertEqual(self.browser.url,
-                         '%s/@@publisher-config' % self.portal_url)
+    @browsing
+    def test_cancel_form_redirects_to_publisher_config(self, browser):
+        browser.login().open(self.config_url)
+        browser.find_button_by_label('Cancel').click()
+        self.assertEqual(browser.url, self.publisher_config_url)

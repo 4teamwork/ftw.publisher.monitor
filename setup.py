@@ -4,15 +4,14 @@ import os
 version = '1.1.3.dev0'
 
 tests_require = [
-    'pyquery',
-    'unittest2',
-    'mocker',
     'zope.configuration',
     'plone.testing',
+    'ftw.builder',
     'ftw.testbrowser',
     'ftw.testing',
     'plone.app.testing',
-    ]
+    'plone.app.contenttypes',
+]
 
 
 setup(name='ftw.publisher.monitor',
