@@ -1,7 +1,7 @@
 import re
 
 
-def email_addresses_validator(value):
+def email_addresses_validator(values):
     """Validator for validating e-mail addresses.
     `value` is a string of carriage-return-seperated bulk of e-mail addresses.
     Returns `True` if all addresses are valid, otherwise `False`.
@@ -12,13 +12,11 @@ def email_addresses_validator(value):
                       r"\.)+[a-z]{2,6}|([0-9]{1,3}\.){3}[0-9]{1,3})$",
                       re.IGNORECASE)
 
-    if value is None:
+    if not values:
         # empty field is ok
         return True
 
-    addresses = value.strip().split('\n')
-    for addr in addresses:
-        addr = addr.strip()
-        if not expr.match(addr):
+    for addr in values:
+        if not expr.match(addr.strip()):
             return False
     return True

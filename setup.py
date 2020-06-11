@@ -4,15 +4,14 @@ import os
 version = '1.1.3.dev0'
 
 tests_require = [
-    'pyquery',
-    'unittest2',
-    'mocker',
     'zope.configuration',
     'plone.testing',
+    'ftw.builder',
     'ftw.testbrowser',
     'ftw.testing',
     'plone.app.testing',
-    ]
+    'plone.app.contenttypes',
+]
 
 
 setup(name='ftw.publisher.monitor',
@@ -29,9 +28,10 @@ setup(name='ftw.publisher.monitor',
       classifiers=[
         'Framework :: Plone',
         'Framework :: Plone :: 4.3',
+        'Framework :: Plone :: 5.1',
         'Programming Language :: Python',
         'Topic :: Software Development :: Libraries :: Python Modules',
-        ],
+      ],
 
       keywords='ftw publisher monitoring',
       author='4teamwork AG',
@@ -53,18 +53,17 @@ setup(name='ftw.publisher.monitor',
         'zope.i18nmessageid',
         'zope.interface',
         'zope.schema',
-        'zope.app.component',
+        'zope.app.component<4a',
         'ZODB3',
         'Zope2',
 
         'plone.fieldsets',
         'plone.app.layout',
         'Products.CMFCore',
-        'Products.CMFDefault',
         'Products.CMFPlone',
 
         'ftw.publisher.sender',
-        ],
+      ],
 
       tests_require=tests_require,
       extras_require=dict(tests=tests_require),
