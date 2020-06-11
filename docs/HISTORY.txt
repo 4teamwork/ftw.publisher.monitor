@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.3 (unreleased)
+2.0.0 (2020-06-11)
 ------------------
 
 - Add Plone 5 compatibility [Nachtalb]
