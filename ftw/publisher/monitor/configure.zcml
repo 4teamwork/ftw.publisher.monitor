@@ -6,6 +6,8 @@
     xmlns:upgrade-step="http://namespaces.zope.org/ftw.upgrade"
     i18n_domain="ftw.publisher.monitor">
 
+    <five:registerPackage package="." initialize=".initialize" />
+
     <include package="ftw.publisher.sender" />
 
     <i18n:registerTranslations directory="locales" />
@@ -26,12 +28,22 @@
         />
 
     <include package="ftw.upgrade" file="meta.zcml" />
+
     <genericsetup:registerProfile
           name="default"
           title="ftw.publisher.monitor"
           directory="profiles/default"
           description=""
           provides="Products.GenericSetup.interfaces.EXTENSION"
+          />
+
+    <genericsetup:registerProfile
+          name="uninstall"
+          title="ftw.publisher.monitor uninstall"
+          directory="profiles/uninstall"
+          description="Uninstalls ftw.publisher.monitor"
+          provides="Products.GenericSetup.interfaces.EXTENSION"
+          for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
           />
 
     <upgrade-step:directory
