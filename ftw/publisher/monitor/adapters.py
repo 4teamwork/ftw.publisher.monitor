@@ -1,9 +1,10 @@
-from Products.CMFCore.interfaces import IPropertiesTool
-from Products.CMFCore.utils import getToolByName
 from email.Header import Header
 from email.MIMEText import MIMEText
 from ftw.publisher.monitor import _
 from ftw.publisher.monitor.interfaces import IMonitorNotifier
+from ftw.publisher.monitor.utils import IS_PLONE_5
+from Products.CMFCore.interfaces import IPropertiesTool
+from Products.CMFCore.utils import getToolByName
 from zope.component import getUtility
 from zope.interface import implements
 
@@ -29,14 +30,24 @@ class MonitorNotifier(object):
         """Sends the email
         """
 
-        properties = getUtility(IPropertiesTool)
         mh = getToolByName(self.context, 'MailHost')
-        from_addr = properties.email_from_address
+
+        if IS_PLONE_5:
+            from Products.CMFPlone.interfaces.controlpanel import IMailSchema
+            from plone.registry.interfaces import IRegistry
+            registry = getUtility(IRegistry)
+            mail_settings = registry.forInterface(IMailSchema, prefix='plone')
+            from_name = mail_settings.email_from_name
+            from_addr = mail_settings.email_from_address.decode('ascii')
+
+        else:
+            properties = getUtility(IPropertiesTool)
+            from_name = properties.email_from_name.decode('utf-8')
+            from_addr = properties.email_from_address.decode('utf-8')
+
         # prepare from address for header
-        header_from = Header(properties.email_from_name.decode('utf-8'),
-                             'iso-8859-1')
-        header_from.append(u'<%s>' % from_addr.decode('utf-8'),
-                           'iso-8859-1')
+        header_from = Header(from_name, 'iso-8859-1')
+        header_from.append(u'<%s>' % from_addr, 'iso-8859-1')
 
         # Subject
         subject = self.context.translate(self.get_subject())

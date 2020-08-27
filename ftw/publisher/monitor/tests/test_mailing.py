@@ -1,13 +1,14 @@
 from Acquisition import aq_base
-from Products.CMFCore.utils import getToolByName
 from ftw.builder import Builder
 from ftw.builder import create
 from ftw.publisher.monitor.interfaces import IMonitorConfigurationSchema
 from ftw.publisher.monitor.tests import MockTestCase
+from ftw.publisher.monitor.utils import IS_PLONE_5
 from ftw.publisher.sender.interfaces import IQueue
 from ftw.testbrowser import browsing
 from plone.app.testing import TEST_USER_ID
 from plone.registry.interfaces import IRegistry
+from Products.CMFCore.utils import getToolByName
 from time import time
 from zope.component import getUtility
 import os
@@ -32,9 +33,17 @@ class TestEmailNotification(MockTestCase):
         self.config.receivers = [u'hugo@boss.com']
 
         # configure mail settings
-        properties_tool = getToolByName(self.portal, 'portal_properties')
-        properties_tool.email_from_name = 'Plone'
-        properties_tool.email_from_address = 'test@plone.org'
+
+        if IS_PLONE_5:
+            from Products.CMFPlone.interfaces.controlpanel import IMailSchema
+            registry = getUtility(IRegistry)
+            mail_settings = registry.forInterface(IMailSchema, prefix='plone')
+            mail_settings.email_from_name = u'Plone'
+            mail_settings.email_from_address = 'test@plone.org'
+        else:
+            properties_tool = getToolByName(self.portal, 'portal_properties')
+            properties_tool.email_from_name = 'Plone'
+            properties_tool.email_from_address = 'test@plone.org'
 
         # patch MailHost
         self.mail_host = self.stub()
