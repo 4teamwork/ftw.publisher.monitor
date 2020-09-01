@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.0.2 (unreleased)
+2.0.2 (2020-09-01)
 ------------------
 
 - Fix sending actual emails with plone 5. [mathias.leimgruber]
