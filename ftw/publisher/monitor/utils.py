@@ -1,4 +1,8 @@
+from plone.registry.interfaces import IRegistry
+import pkg_resources
 import re
+
+IS_PLONE_5 = pkg_resources.get_distribution('Plone').version >= '5'
 
 
 def email_addresses_validator(values):

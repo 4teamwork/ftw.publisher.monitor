@@ -5,7 +5,7 @@ Changelog
 2.0.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix sending actual emails with plone 5. [mathias.leimgruber]
 
 
 2.0.1 (2020-08-04)
