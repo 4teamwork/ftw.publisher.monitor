@@ -60,7 +60,7 @@ class MonitorNotifier(object):
 
         for rcpt in self.config.receivers:
             msg['To'] = rcpt
-            mh.send(msg, mto=rcpt, mfrom=from_addr, subject=subject, immediate=True)
+            mh.send(msg, mto=rcpt, mfrom=from_addr, subject=subject, charset='utf-8', immediate=True)
 
     def get_subject(self):
         return _(u'mail_subject',
